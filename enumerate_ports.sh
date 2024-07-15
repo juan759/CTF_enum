@@ -27,9 +27,10 @@ if [ "$verbose" = true ]; then
   ports=$(rustscan -a $target -g| grep -o '\[[0-9,]*\]'|sed 's/[][]//g')
   echo "[+]Open ports are $ports"
   echo "[+]Running NMAP..."
-  nmap -T5 -p $ports -sV -oA nmap_results -v
+  nmap $target -T5 -p $ports -sV -oA nmap_results -v
 else
-  ports=$(rustcan -a $target -g| grep -o '\[[0-9,]*\]'|sed 's/[][]//g')
-  nmap -T5 -p $ports -sV -oA nmap_results
+  ports=$(rustscan -a $target -g| grep -o '\[[0-9,]*\]'|sed 's/[][]//g')
+  echo $ports
+  nmap $target -T5 -p $ports -sV -oA nmap_results
 fi
   
